@@ -1,0 +1,93 @@
+\RequirePackage{tikz, datetime, textpos}
+
+\definecolor{MedianBrown}{RGB}{119,95,85}
+\definecolor{MedianLightBrown}{RGB}{235,221,195}
+\definecolor{MedianLightBlue}{RGB}{148,182,210}
+\definecolor{LightGrey}{RGB}{170,170,170}
+\definecolor{MedianLightOrange}{RGB}{216,178,92}
+\definecolor{MedianUltraLightOrange}{RGB}{245,236,215}
+
+\setbeamercolor*{title page header}{fg=MedianBrown}
+\setbeamercolor*{title}{fg=MedianLightBrown}
+\setbeamercolor*{author}{fg=white}
+\setbeamercolor*{date}{fg=white}
+\setbeamercolor*{item}{fg=LightGrey}
+\setbeamercolor*{frametitle}{fg=MedianBrown}
+\setbeamercolor*{block title}{fg=white, bg=LightGrey}
+\setbeamercolor*{block title example}{fg=white, bg=MedianLightOrange}
+\setbeamercolor*{block body}{bg=MedianUltraLightOrange}
+\setbeamercolor*{block body example}{bg=MedianUltraLightOrange}
+\setbeamercolor*{section in toc}{fg=black}
+\setbeamercolor*{section page}{fg=white}
+
+\setbeamerfont{section page}{size=\LARGE, series=\bfseries}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{author}{size=\Large,}
+\setbeamerfont{date}{size=\Large, series=\bfseries}
+
+\setbeamertemplate{bibliography item}[text]
+\setbeamercolor*{bibliography item}{fg=black}
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor{bibliography entry author}{fg=black}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[square]
+\setbeamertemplate{itemize item}{\tikz{\draw[color=LightGrey, semithick] rectangle(.2,.2);}}
+\setbeamertemplate{itemize subitem}{\tikz{\draw[color=MedianLightBlue, ultra thick] rectangle(.2,.2);}}
+\setbeamertemplate{sections/subsections in toc}[square]
+
+\newenvironment{xplainframe}{\bgroup\setbeamertemplate{background}{}\begin{frame}[plain]}{\end{frame}\egroup}
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \ifnum\thepage>1\relax% Not the title page
+	    \fill[color=LightGrey] (0,8) rectangle(0.8,8.3);
+	    \fill[color=MedianLightBlue] (0.9,8) rectangle(\the\paperwidth, 8.3);
+  \else% Title page
+	  \fill[color=white] (0,1.2) rectangle (\the\paperwidth,\the\paperheight);
+	  \fill[color=LightGrey] (0,0.1) rectangle(3.15,1.1);
+	  \fill[color=MedianLightBlue] (3.3,0.1) rectangle(\the\paperwidth,1.1); 
+  \fi
+  \end{tikzpicture}
+}
+\setbeamertemplate{title page}{
+	\begin{textblock*}{12cm}(2.5cm,2.4cm)
+    \begin{beamercolorbox}[wd=8cm]{title page header}
+      \usebeamerfont{title}\usebeamercolor{title}\inserttitle%
+    \end{beamercolorbox}%
+    \end{textblock*}
+    \begin{textblock*}{9cm}(-0.5cm,5cm)
+		\begin{beamercolorbox}{date}
+	      \usebeamerfont{date}\insertdate%
+	    \end{beamercolorbox}
+    \end{textblock*}
+    \begin{textblock*}{9cm}(2.5cm,5cm)
+	    \begin{beamercolorbox}{author}
+	      \usebeamerfont{author}\insertauthor%
+    	\end{beamercolorbox}
+    \end{textblock*}
+}
+\newcommand{\sectionframe}{{
+	\setbeamertemplate{background}{
+		\begin{tikzpicture}
+			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+			\fill[color=LightGrey] (0,6) rectangle (1.5, 7);
+			\fill[color=MedianLightBlue] (1.6, 6) rectangle (\the\paperwidth, 7);
+		\end{tikzpicture}
+	}
+	\frame{\sectionpage}
+}}
+\setbeamertemplate{section page}{
+	\begin{textblock*}{12cm}(0.8cm,-0.9cm)
+		\begin{beamercolorbox}{section page}
+			\insertsectionhead
+		\end{beamercolorbox}
+	\end{textblock*}
+}
+\setbeamertemplate{frametitle}{
+	\vspace{0.3cm}
+	\begin{beamercolorbox}{frametitle}
+		\insertframetitle
+	\end{beamercolorbox}
+}
